@@ -5,16 +5,19 @@ type Data = {
   playerName: string;
   role: string;
   color: string;
+  gameName: string;
 };
 
 const prisma = new PrismaClient();
 
 async function main ( { body }: { body: Data } ) {
+  const game = await prisma.game.findFirstOrThrow({ where: { name: body.gameName } })
   await prisma.player.create( {
     data: {
       name: body.playerName,
       role: body.role,
-      color: body.color
+      color: body.color,
+      gameId: game.id
     }
   } )
   const [ savePlayer ] = await Promise.all( [ prisma.player.findMany( {

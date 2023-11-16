@@ -7,7 +7,8 @@ describe( 'Player CRUD being tested', () => {
       id: 1,
       name: 'John Doe',
       role: 'medium',
-      color: "white"
+      color: "white",
+      gameId: 1
     }
 
     prismaMock.player.create.mockResolvedValue( player )
@@ -16,7 +17,8 @@ describe( 'Player CRUD being tested', () => {
       id: 1,
       name: 'John Doe',
       role: 'medium',
-      color: "white"
+      color: "white",
+      gameId: 1
     } )
 
   } )
@@ -26,7 +28,8 @@ describe( 'Player CRUD being tested', () => {
       id: 1,
       name: "Jane Doe",
       role: "medium",
-      color: "white"
+      color: "white",
+      gameId: 1
     }
 
     prismaMock.player.update.mockResolvedValue( player )
@@ -35,7 +38,8 @@ describe( 'Player CRUD being tested', () => {
       id: 1,
       name: "Jane Doe",
       role: "medium",
-      color: "white"
+      color: "white",
+      gameId: 1
     } )
   } )
 
@@ -44,7 +48,8 @@ describe( 'Player CRUD being tested', () => {
       id: 1,
       name: "Jane Doe",
       role: "medium",
-      color: "white"
+      color: "white",
+      gameId: 1
     }
 
     prismaMock.player.delete.mockResolvedValue( player )
@@ -53,7 +58,8 @@ describe( 'Player CRUD being tested', () => {
       id: 1,
       name: "Jane Doe",
       role: "medium",
-      color: "white"
+      color: "white",
+      gameId: 1
     } )
   } )
 
@@ -67,6 +73,7 @@ describe( 'Player CRUD being tested', () => {
 
     prismaMock.player.create.mockImplementation()
 
+    // @ts-ignore
     await expect( createPlayer( player ) ).resolves.toEqual(
         new Error( "Player name and role are required" )
     )

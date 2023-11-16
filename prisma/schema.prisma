@@ -7,9 +7,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Game {
+  id      Int      @id @default(autoincrement())
+  name    String   @unique @db.VarChar(255)
+  players Player[]
+}
+
 model Player {
-  id    Int     @id @default(autoincrement())
-  name  String? @db.VarChar(255)
-  role  String? @db.VarChar(255)
-  color String? @db.VarChar(255)
+  id     Int    @id @default(autoincrement())
+  name   String @db.VarChar(255)
+  role   String @db.VarChar(255)
+  color  String @db.VarChar(255)
+  Game   Game   @relation(fields: [gameId], references: [id])
+  gameId Int
 }
