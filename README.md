@@ -1,5 +1,7 @@
 # Mysterium
 
+![Lancer une partie de Mysterium](./public/screenshot.png "Mysterium")
+
 ## Introduction
 
 Will you dare to cross the threshold of the Mysterium Manor ?
@@ -26,6 +28,9 @@ This project uses the following dependencies :
 - [Prisma](https://www.prisma.io/) - v5
 - [Axios](https://axios-http.com/) - v1
 - [Bun](https://bun.sh) - v1
+- [Jest](https://jestjs.io/) - v29
+- [ts-jest](https://kulshekhar.github.io/ts-jest/) - v29
+- [jest-mock-extended](https://www.npmjs.com/package/jest-mock-extended) - v3
 
 ## Installation
 
@@ -43,6 +48,18 @@ Quick commands to run the project :
 
 ```bash
 bun dev
+```
+
+Quick commands to run the tests :
+
+```bash
+bun run test
+```
+
+or 
+
+```bash
+jest
 ```
 
 ## Production build
