@@ -8,16 +8,27 @@ datasource db {
 }
 
 model Game {
-  id      Int      @id @default(autoincrement())
-  name    String   @unique @db.VarChar(255)
-  players Player[]
+  id      Int       @id @default(autoincrement())
+  name    String    @unique @db.VarChar(255)
+  Session Session[]
+}
+
+model Session {
+  id     Int      @id @default(autoincrement())
+  name   String   @db.VarChar(255)
+  Game   Game     @relation(fields: [gameId], references: [id])
+  gameId Int
+  player Player[]
 }
 
 model Player {
-  id     Int    @id @default(autoincrement())
-  name   String @db.VarChar(255)
-  role   String @db.VarChar(255)
-  color  String @db.VarChar(255)
-  Game   Game   @relation(fields: [gameId], references: [id])
-  gameId Int
+  id          Int     @id @default(autoincrement())
+  name        String  @db.VarChar(255)
+  role        String  @db.VarChar(255)
+  color       String  @db.VarChar(255)
+  score       Int     @default(0)
+  FindSet     Boolean @default(false)
+  FindGeneral Boolean @default(false)
+  Session     Session @relation(fields: [sessionId], references: [id])
+  sessionId   Int
 }

@@ -5,19 +5,18 @@ type Data = {
   playerName: string;
   role: string;
   color: string;
-  gameName: string;
+  sessionId: number;
 };
 
 const prisma = new PrismaClient();
 
 async function main ( { body }: { body: Data } ) {
-  const game = await prisma.game.findFirstOrThrow({ where: { name: body.gameName } })
   await prisma.player.create( {
     data: {
       name: body.playerName,
       role: body.role,
       color: body.color,
-      gameId: game.id
+      sessionId: body.sessionId
     }
   } )
   const [ savePlayer ] = await Promise.all( [ prisma.player.findMany( {
@@ -32,7 +31,6 @@ export async function POST ( req: Request ) {
     const data = await req.json()
       const player = await main( data )
       let json_response = {
-        status: 200,
         data: {
           message: 'Player created',
           parseData: data.body,

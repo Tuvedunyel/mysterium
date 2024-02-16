@@ -11,7 +11,6 @@ export async function DELETE ( request: Request, context: any ) {
     } )
 
     let json_response = {
-      status: 200,
       data: {
         message: 'Player deleted',
         data: player
@@ -41,7 +40,8 @@ export async function PATCH ( request: Request, context: any ) {
       name: data.body.playerName,
       role: data.body.role,
       color: data.body.color,
-      id: Number( playerId )
+      id: Number( playerId ),
+      sessionId: Number(data.body.sessionId)
     }
   } )
 

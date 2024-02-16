@@ -9,17 +9,15 @@ export async function GET ( request: Request, context: any ) {
     const data = await prisma.game.findUniqueOrThrow( { where: { id: Number(gameId) } } )
 
     let json_response = {
-      status: "Success",
       data: data
     }
 
     return NextResponse.json({
       json_response
-    })
+    }, { status: 200 })
 
   } catch(error: any) {
     let error_message = {
-      status: "error",
       error: error.message
     }
 
@@ -40,12 +38,11 @@ export async function DELETE ( request: Request, context: any ) {
 
   } catch(error: any) {
     let error_message = {
-      status: "error",
       message: error.message
     }
 
     return NextResponse.json({
       error_message
-    })
+    }, { status: 500 })
   }
 }

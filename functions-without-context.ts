@@ -34,7 +34,7 @@ interface CreatePlayer {
   name: string,
   role: string,
   color: string,
-  gameId: number
+  sessionId: number
 }
 
 export async function createPlayer ( player: CreatePlayer ) {
@@ -53,7 +53,7 @@ interface UpdatePlayer {
   name: string,
   role: string,
   color: string
-  gameId: number
+  sessionId: number
 }
 
 export async function updatePlayerInformation ( player: UpdatePlayer ) {

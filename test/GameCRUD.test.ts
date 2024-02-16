@@ -1,45 +1,26 @@
 import { createGame, deleteGame } from "../functions-without-context"
 import { prismaMock } from "../singleton";
 
-describe( 'Game CRUD being test', () => {
+const game = {
+  id: 1,
+  name: "Test Game"
+};
 
-  test( 'Shloud create a new game', async () => {
-    const game = {
-      id: 1,
-      name: "Test Game"
-    }
+describe('Game CRUD being test', () => {
+  test('Should create a new game', async () => {
+    prismaMock.game.create.mockResolvedValue(game);
+    await expect(createGame(game)).resolves.toEqual(game);
+  });
 
-    prismaMock.game.create.mockResolvedValue( game )
+  test('Should delete a game', async () => {
+    prismaMock.game.delete.mockResolvedValue(game);
+    await expect(deleteGame(game)).resolves.toEqual(game);
+  });
 
-    await expect( createGame( game ) ).resolves.toEqual( {
-      id: 1,
-      name: "Test Game"
-    } )
-  } )
-
-  test( 'Should delete a game', async () => {
-    const game = {
-      id: 1,
-      name: "Test Game"
-    }
-
-    prismaMock.game.delete.mockResolvedValue( game )
-
-    await expect( deleteGame( game ) ).resolves.toEqual( {
-      id: 1,
-      name: "Test Game"
-    } )
-  } );
-
-  test( ' Should fail if the game name is not specified', async () => {
-    const game = {
-      id: 1,
-      name: null
-    }
-
+  test('Should fail if the game name is not specified', async () => {
+    const gameWithoutName = { ...game, name: null };
     prismaMock.game.create.mockImplementation();
-
     // @ts-ignore
-    await expect( createGame( game ) ).resolves.toEqual( new Error( "Game must have a name" ) );
-  } )
-} )
+    await expect(createGame(gameWithoutName)).resolves.toEqual(new Error("Game must have a name"));
+  });
+});
