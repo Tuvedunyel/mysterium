@@ -8,13 +8,12 @@ type Game = {
 const prisma = new PrismaClient();
 
 export async function GET ( request: Request ) {
-  try {
+  try {")
   const game = await prisma.game.findMany( {
     orderBy: {
       id: 'desc'
     }
   } )
-php
   let json_response = {
     data: { game }
   }
